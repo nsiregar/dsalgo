@@ -57,7 +57,7 @@ func TestInsertNodeGreater(t *testing.T) {
 	assert.Equal(t, node.Right.Right.Right.Value, third_value)
 }
 
-func TestBinaryTree(t *testing.T) {
+func TestBinaryTreeInsertion(t *testing.T) {
 	var (
 		first_value  int64 = 10
 		second_value int64 = 15
