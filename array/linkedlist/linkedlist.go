@@ -1,6 +1,6 @@
 package linkedlist
 
-import "fmt"
+import "errors"
 
 type Item struct {
 	Value int64
@@ -10,32 +10,31 @@ type Item struct {
 type LinkedList struct {
 	Size int
 	Head *Item
+	Tail *Item
 }
 
 func (ll *LinkedList) Push(item *Item) {
 	if ll.Size == 0 {
 		ll.Head = item
+		ll.Tail = item
 	} else {
-		currentItem := ll.Head
-		for currentItem.Next != nil {
-			currentItem = currentItem.Next
-		}
-		currentItem.Next = item
+		tail := ll.Tail
+		tail.Next = item
+		ll.Tail = item
 	}
 	ll.Size++
 }
 
 func (ll *LinkedList) Pop() {
 	if ll.Size == 0 {
-		fmt.Printf("Empty List")
-	} else {
-		currentItem := ll.Head
-		prevItem := ll.Head
-		for currentItem.Next != nil {
-			prevItem = currentItem
-			currentItem = currentItem.Next
-		}
-		prevItem.Next = nil
+		panic(errors.New("Empty List"))
 	}
+	var prevItem *Item
+	currentItem := ll.Head
+	for currentItem.Next != nil {
+		prevItem = currentItem
+		currentItem = currentItem.Next
+	}
+	prevItem.Next = currentItem.Next
 	ll.Size--
 }

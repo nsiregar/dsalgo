@@ -8,6 +8,7 @@ import (
 )
 
 func TestLinkedListBehavior(t *testing.T) {
+	var emptyItem *Item
 	firstItem := &Item{
 		Value: 10,
 	}
@@ -27,4 +28,5 @@ func TestLinkedListBehavior(t *testing.T) {
 	linkedlist.Pop()
 	assert.Equal(t, linkedlist.Size, 1)
 	assert.Equal(t, linkedlist.Head.Value, firstItem.Value)
+	assert.Equal(t, linkedlist.Head.Next, emptyItem)
 }
