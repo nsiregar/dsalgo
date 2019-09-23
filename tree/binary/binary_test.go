@@ -1,117 +1,75 @@
 package binary_test
 
 import (
-	. "github.com/onsi/ginkgo"
-	. "github.com/onsi/gomega"
+	"testing"
 
 	"github.com/nsiregar/dsalgo/tree/binary"
+	"github.com/stretchr/testify/assert"
 )
 
-var _ = Describe("Binary Tree", func() {
-	Describe("Node", func() {
-		Describe("#NewNode", func() {
-			It("initialize node object", func() {
-				node := binary.NewNode(12)
-				result := binary.Node{
-					Value: 12,
-				}
+var (
+	root_value int64 = 24
+)
 
-				Expect(node).To(Equal(result))
-			})
-		})
+func TestNodeCreation(t *testing.T) {
+	node := binary.NewNode(12)
+	result := binary.Node{
+		Value: 12,
+	}
 
-		Describe("#Insert", func() {
-			Context("less or equal than current node value", func() {
-				Context("left node nil", func() {
-					var new_value int64
+	assert.Equal(t, node, result)
+}
 
-					It("insert to the left", func() {
-						node := binary.NewNode(24)
-						new_value = 20
+func TestInsertNodeLessOrEqual(t *testing.T) {
+	var (
+		first_value  int64 = 20
+		second_value int64 = 20
+		third_value  int64 = 18
+	)
+	node := binary.NewNode(root_value)
 
-						node.Insert(new_value)
+	node.Insert(first_value)
+	assert.Equal(t, node.Left.Value, first_value)
 
-						Expect(node.Left.Value).To(Equal(new_value))
-					})
-				})
+	node.Insert(second_value)
+	assert.Equal(t, node.Left.Left.Value, second_value)
 
-				Context("left node not nil", func() {
-					var second_node int64
-					var third_node int64
+	node.Insert(third_value)
+	assert.Equal(t, node.Left.Left.Left.Value, third_value)
+}
 
-					It("call #Insert on nodes", func() {
-						node := binary.NewNode(24)
-						second_node = 20
-						third_node = 18
+func TestInsertNodeGreater(t *testing.T) {
+	var (
+		first_value  int64 = 26
+		second_value int64 = 28
+		third_value  int64 = 30
+	)
 
-						node.Insert(second_node)
-						node.Insert(third_node)
+	node := binary.NewNode(root_value)
 
-						Expect(node.Left.Value).To(Equal(second_node))
-						Expect(node.Left.Left.Value).To(Equal(third_node))
-					})
-				})
-			})
+	node.Insert(first_value)
+	assert.Equal(t, node.Right.Value, first_value)
 
-			Context("greater than current node value", func() {
-				Context("right node nil", func() {
-					var new_value int64
+	node.Insert(second_value)
+	assert.Equal(t, node.Right.Right.Value, second_value)
 
-					It("insert to the right", func() {
-						node := binary.NewNode(24)
-						new_value = 25
+	node.Insert(third_value)
+	assert.Equal(t, node.Right.Right.Right.Value, third_value)
+}
 
-						node.Insert(new_value)
+func TestBinaryTree(t *testing.T) {
+	var (
+		first_value  int64 = 10
+		second_value int64 = 15
+	)
+	binarytree := binary.Tree{}
 
-						Expect(node.Right.Value).To(Equal(new_value))
-					})
-				})
+	binarytree.Insert(root_value)
+	assert.Equal(t, binarytree.Root.Value, root_value)
 
-				Context("right node not nil", func() {
-					var second_node int64
-					var third_node int64
+	binarytree.Insert(first_value)
+	assert.Equal(t, binarytree.Root.Left.Value, first_value)
 
-					It("call #Insert on nodes", func() {
-						node := binary.NewNode(24)
-						second_node = 25
-						third_node = 30
-
-						node.Insert(second_node)
-						node.Insert(third_node)
-
-						Expect(node.Right.Value).To(Equal(second_node))
-						Expect(node.Right.Right.Value).To(Equal(third_node))
-					})
-				})
-			})
-		})
-	})
-
-	Describe("BinaryTree", func() {
-		Context("#Insert", func() {
-			Context("root is nil", func() {
-				var root_value int64
-
-				It("create root node", func() {
-					binarytree := binary.Tree{}
-					root_value = 64
-
-					binarytree.Insert(root_value)
-
-					Expect(binarytree.Root.Value).To(Equal(root_value))
-				})
-			})
-
-			Context("root is not nil", func() {
-				It("insert to nodes", func() {
-					binarytree := binary.Tree{}
-					binarytree.Insert(10)
-					binarytree.Insert(15)
-
-					Expect(binarytree.Root.Value).To(Equal(int64(10)))
-					Expect(binarytree.Root.Right.Value).To(Equal(int64(15)))
-				})
-			})
-		})
-	})
-})
+	binarytree.Insert(second_value)
+	assert.Equal(t, binarytree.Root.Left.Right.Value, second_value)
+}
