@@ -25,6 +25,7 @@ func TestCircularBuffer(t *testing.T) {
 	circular.Insert(nodeTwo)
 	assert.Equal(t, 2, circular.Length())
 	assert.Equal(t, nodeTwo, circular.Last())
+	assert.Equal(t, nodeTwo.Next(), node)
 }
 
 func TestFullCircularBuffer(t *testing.T) {

@@ -30,6 +30,7 @@ func (cb *CircularBuffer) Insert(node *Node) {
 		rear.next = node
 		cb.rear = node
 	}
+	cb.rear.next = cb.front
 	cb.total++
 }
 
@@ -52,4 +53,8 @@ func (cb *CircularBuffer) First() *Node {
 
 func (cb *CircularBuffer) Last() *Node {
 	return cb.rear
+}
+
+func (node *Node) Next() *Node {
+	return node.next
 }
