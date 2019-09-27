@@ -28,42 +28,48 @@ func TestBinaryTree(t *testing.T) {
 		{
 			t.Log("\t\twhen value <= node value")
 			{
-				var (
-					first_value  int64 = 20
-					second_value int64 = 20
-					third_value  int64 = 18
-				)
+				t.Log("\t\t\tshould insert to left")
+				{
+					var (
+						first_value  int64 = 20
+						second_value int64 = 20
+						third_value  int64 = 18
+					)
 
-				node := binary.NewNode(root_value)
+					node := binary.NewNode(root_value)
 
-				node.Insert(first_value)
-				assert.Equal(t, node.Left.Value, first_value)
+					node.Insert(first_value)
+					assert.Equal(t, node.Left.Value, first_value)
 
-				node.Insert(second_value)
-				assert.Equal(t, node.Left.Left.Value, second_value)
+					node.Insert(second_value)
+					assert.Equal(t, node.Left.Left.Value, second_value)
 
-				node.Insert(third_value)
-				assert.Equal(t, node.Left.Left.Left.Value, third_value)
+					node.Insert(third_value)
+					assert.Equal(t, node.Left.Left.Left.Value, third_value)
+				}
 			}
 
 			t.Log("\t\twhen value > node value")
 			{
-				var (
-					first_value  int64 = 26
-					second_value int64 = 28
-					third_value  int64 = 30
-				)
+				t.Log("\t\t\tshould insert to right")
+				{
+					var (
+						first_value  int64 = 26
+						second_value int64 = 28
+						third_value  int64 = 30
+					)
 
-				node := binary.NewNode(root_value)
+					node := binary.NewNode(root_value)
 
-				node.Insert(first_value)
-				assert.Equal(t, node.Right.Value, first_value)
+					node.Insert(first_value)
+					assert.Equal(t, node.Right.Value, first_value)
 
-				node.Insert(second_value)
-				assert.Equal(t, node.Right.Right.Value, second_value)
+					node.Insert(second_value)
+					assert.Equal(t, node.Right.Right.Value, second_value)
 
-				node.Insert(third_value)
-				assert.Equal(t, node.Right.Right.Right.Value, third_value)
+					node.Insert(third_value)
+					assert.Equal(t, node.Right.Right.Right.Value, third_value)
+				}
 			}
 		}
 	}
