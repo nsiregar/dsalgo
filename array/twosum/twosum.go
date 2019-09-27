@@ -1,6 +1,11 @@
 package twosum
 
+import "errors"
+
 func TwoSum(arr []int, target int) [2]int {
+	if len(arr) < 2 {
+		panic(errors.New("Required minimum 2 array members"))
+	}
 	var result [2]int
 	arrMap := make(map[int]int)
 

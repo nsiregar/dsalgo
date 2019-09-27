@@ -14,3 +14,10 @@ func TestTwoSumArray(t *testing.T) {
 
 	assert.Equal(t, result, TwoSum(arr, target))
 }
+
+func TestSortArray(t *testing.T) {
+	arr := []int{1}
+	target := 2
+
+	assert.Panics(t, func() { TwoSum(arr, target) })
+}
