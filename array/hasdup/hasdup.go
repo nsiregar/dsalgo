@@ -19,10 +19,13 @@ func Verify(arr []int) bool {
 func Counter(arr []int, target int) int {
 	var count int
 	for idx := 0; idx < len(arr); idx++ {
+		if count > 1 {
+			return count
+		}
+
 		if target == arr[idx] {
 			count++
 		}
 	}
-
 	return count
 }
