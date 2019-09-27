@@ -8,8 +8,19 @@ import (
 )
 
 func TestSelectionSort(t *testing.T) {
-	arr := []int{5, 3, 1, 6, 7, 2, 4, 8}
-	result := []int{1, 2, 3, 4, 5, 6, 7, 8}
+	t.Log("should sort array")
+	{
+		arr := []int{5, 3, 1, 6, 7, 2, 4, 8}
+		result := []int{1, 2, 3, 4, 5, 6, 7, 8}
 
-	assert.Equal(t, selection.Sort(arr), result, "should sort array")
+		assert.Equal(t, selection.Sort(arr), result)
+	}
+}
+
+func BenchmarkSelectionSort(b *testing.B) {
+	arr := []int{5, 3, 1, 6, 7, 2, 4, 8}
+
+	for idx := 0; idx < b.N; idx++ {
+		selection.Sort(arr)
+	}
 }
