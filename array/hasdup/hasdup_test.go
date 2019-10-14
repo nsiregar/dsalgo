@@ -7,36 +7,20 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestHasDupArray(t *testing.T) {
-	t.Log("when array < 2")
-	{
-		arr := []int{1}
-		t.Log("raise panic")
-		{
-			assert.Panics(t, func() { hasdup.Verify(arr) })
-		}
-	}
+func TestHasDupArrayRaisePanic(t *testing.T) {
+	arr := []int{1}
+	t.Log("raise panic")
+	assert.Panics(t, func() { hasdup.Verify(arr) })
+}
 
-	t.Log("when array >= 2")
-	{
-		t.Log("\thas duplicate member")
-		{
-			arr := []int{1, 1, 2}
-			t.Log("\t\treturns true")
-			{
-				assert.True(t, hasdup.Verify(arr))
-			}
-		}
+func TestHasDupArrayHasDuplicateMember(t *testing.T) {
+	arr := []int{1, 1, 2}
+	assert.True(t, hasdup.Verify(arr))
+}
 
-		t.Log("\thas no duplicate member")
-		{
-			arr := []int{2, 1, 3}
-			t.Log("\t\treturns false")
-			{
-				assert.False(t, hasdup.Verify(arr))
-			}
-		}
-	}
+func TestHasDupArrayNoDuplicateMember(t *testing.T) {
+	arr := []int{2, 1, 3}
+	assert.False(t, hasdup.Verify(arr))
 }
 
 func BenchmarkHasDupArray(b *testing.B) {

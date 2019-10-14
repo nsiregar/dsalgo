@@ -7,93 +7,72 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestBinaryTree(t *testing.T) {
+func TestBinaryNodeCreation(t *testing.T) {
+	node := binary.NewNode(12)
+	result := binary.Node{
+		Value: 12,
+	}
+
+	assert.Equal(t, node, result)
+}
+
+func TestBinaryNodeLeftInsertion(t *testing.T) {
 	var (
-		root_value int64 = 24
+		root_value   int64 = 24
+		first_value  int64 = 20
+		second_value int64 = 20
+		third_value  int64 = 18
 	)
 
-	t.Log("Tree node")
-	{
-		t.Log("\tnode creation")
-		{
-			node := binary.NewNode(12)
-			result := binary.Node{
-				Value: 12,
-			}
+	node := binary.NewNode(root_value)
 
-			assert.Equal(t, node, result)
-		}
+	node.Insert(first_value)
+	assert.Equal(t, node.Left.Value, first_value)
 
-		t.Log("\tinsertion")
-		{
-			t.Log("\t\twhen value <= node value")
-			{
-				t.Log("\t\t\tshould insert to left")
-				{
-					var (
-						first_value  int64 = 20
-						second_value int64 = 20
-						third_value  int64 = 18
-					)
+	node.Insert(second_value)
+	assert.Equal(t, node.Left.Left.Value, second_value)
 
-					node := binary.NewNode(root_value)
+	node.Insert(third_value)
+	assert.Equal(t, node.Left.Left.Left.Value, third_value)
+}
 
-					node.Insert(first_value)
-					assert.Equal(t, node.Left.Value, first_value)
+func TestBinaryNodeRightInsertion(t *testing.T) {
+	var (
+		root_value   int64 = 24
+		first_value  int64 = 26
+		second_value int64 = 28
+		third_value  int64 = 30
+	)
 
-					node.Insert(second_value)
-					assert.Equal(t, node.Left.Left.Value, second_value)
+	node := binary.NewNode(root_value)
 
-					node.Insert(third_value)
-					assert.Equal(t, node.Left.Left.Left.Value, third_value)
-				}
-			}
+	node.Insert(first_value)
+	assert.Equal(t, node.Right.Value, first_value)
 
-			t.Log("\t\twhen value > node value")
-			{
-				t.Log("\t\t\tshould insert to right")
-				{
-					var (
-						first_value  int64 = 26
-						second_value int64 = 28
-						third_value  int64 = 30
-					)
+	node.Insert(second_value)
+	assert.Equal(t, node.Right.Right.Value, second_value)
 
-					node := binary.NewNode(root_value)
+	node.Insert(third_value)
+	assert.Equal(t, node.Right.Right.Right.Value, third_value)
+}
 
-					node.Insert(first_value)
-					assert.Equal(t, node.Right.Value, first_value)
+func TestBinaryTreeInsertion(t *testing.T) {
+	var (
+		root_value   int64 = 24
+		first_value  int64 = 10
+		second_value int64 = 15
+	)
 
-					node.Insert(second_value)
-					assert.Equal(t, node.Right.Right.Value, second_value)
+	binarytree := binary.Tree{}
 
-					node.Insert(third_value)
-					assert.Equal(t, node.Right.Right.Right.Value, third_value)
-				}
-			}
-		}
-	}
+	binarytree.Insert(root_value)
+	assert.Equal(t, binarytree.Root.Value, root_value)
 
-	t.Log("Binary Tree")
-	{
-		t.Log("\tinsertion")
-		{
-			var (
-				first_value  int64 = 10
-				second_value int64 = 15
-			)
-			binarytree := binary.Tree{}
+	binarytree.Insert(first_value)
+	assert.Equal(t, binarytree.Root.Left.Value, first_value)
 
-			binarytree.Insert(root_value)
-			assert.Equal(t, binarytree.Root.Value, root_value)
-
-			binarytree.Insert(first_value)
-			assert.Equal(t, binarytree.Root.Left.Value, first_value)
-
-			binarytree.Insert(second_value)
-			assert.Equal(t, binarytree.Root.Left.Right.Value, second_value)
-		}
-	}
+	binarytree.Insert(second_value)
+	assert.Equal(t, binarytree.Root.Left.Right.Value, second_value)
 }
 
 func TestBinarySearch(t *testing.T) {
