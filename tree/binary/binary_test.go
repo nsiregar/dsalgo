@@ -95,3 +95,16 @@ func TestBinaryTree(t *testing.T) {
 		}
 	}
 }
+
+func TestBinarySearch(t *testing.T) {
+	values := []int64{23, 28, 20, 19, 30, 34, 35, 18}
+	tree := binary.Tree{}
+
+	for _, val := range values {
+		tree.Insert(int64(val))
+	}
+
+	assert.Equal(t, true, tree.Search(35))
+	assert.Equal(t, true, tree.Search(19))
+	assert.Equal(t, false, tree.Search(12))
+}
