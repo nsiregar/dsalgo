@@ -19,6 +19,9 @@ Algorithms
 - [Bubble Sort](https://en.wikipedia.org/wiki/Bubble_sort)
 - [Selection Sort](https://en.wikipedia.org/wiki/Selection_sort)
 
+### Searching
+- [Binary Search Tree](https://en.wikipedia.org/wiki/Binary_search_tree)
+
 
 Data Structure
 --------------
