@@ -38,6 +38,22 @@ func (n *Node) Insert(value int64) {
 	}
 }
 
+func (n *Node) Search(value int64) bool {
+	if n == nil {
+		return false
+	}
+
+	if n.Value > value {
+		return n.Left.Search(value)
+	}
+
+	if n.Value < value {
+		return n.Right.Search(value)
+	}
+
+	return true
+}
+
 func (t *Tree) Insert(value int64) *Tree {
 	if t.Root == nil {
 		t.Root = &Node{
@@ -48,4 +64,8 @@ func (t *Tree) Insert(value int64) *Tree {
 	}
 
 	return t
+}
+
+func (t *Tree) Search(value int64) bool {
+	return t.Root.Search(value)
 }
